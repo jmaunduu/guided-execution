@@ -1,12 +1,103 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect } from 'react';
+import { useDashboardStore } from '@/stores/dashboardStore';
+import { HeroMetrics } from '@/components/dashboard/HeroMetrics';
+import { WeekComparison } from '@/components/dashboard/WeekComparison';
+import { TrendCharts } from '@/components/dashboard/TrendCharts';
+import { RecentExpenses } from '@/components/dashboard/RecentExpenses';
+import { QuickMetrics } from '@/components/dashboard/QuickMetrics';
+import { HealthScore } from '@/components/dashboard/HealthScore';
+import { PaymentTracker } from '@/components/dashboard/PaymentTracker';
+import { FAB } from '@/components/dashboard/FAB';
+import { AddExpenseModal } from '@/components/modals/AddExpenseModal';
+import { AddRevenueModal } from '@/components/modals/AddRevenueModal';
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+  const { fetchDashboardData, isLoading } = useDashboardStore();
+  
+  useEffect(() => {
+    fetchDashboardData();
+  }, [fetchDashboardData]);
+  
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <span className="text-4xl">🐔</span>
+          </div>
+          <p className="text-muted-foreground">Loading your dashboard...</p>
+        </div>
       </div>
+    );
+  }
+  
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-card border-b border-border sticky top-0 z-30">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-3xl">🐔</span>
+              <div>
+                <h1 className="text-heading font-bold text-foreground">Magolla Farm</h1>
+                <p className="text-micro text-muted-foreground">Financial Dashboard</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-sm font-medium text-foreground">
+                {new Date().toLocaleDateString('en-KE', { weekday: 'long', day: 'numeric', month: 'short' })}
+              </p>
+              <p className="text-micro text-muted-foreground">Kenya</p>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-6 pb-24 space-y-6">
+        {/* Hero Metrics */}
+        <section aria-label="Key metrics">
+          <HeroMetrics />
+        </section>
+        
+        {/* Financial Health Score */}
+        <section aria-label="Financial health">
+          <HealthScore />
+        </section>
+        
+        {/* Week Comparison */}
+        <section aria-label="Weekly comparison">
+          <WeekComparison />
+        </section>
+        
+        {/* Trend Charts */}
+        <section aria-label="Trends">
+          <TrendCharts />
+        </section>
+        
+        {/* Quick Metrics */}
+        <section aria-label="Quick metrics">
+          <QuickMetrics />
+        </section>
+        
+        {/* Recent Expenses */}
+        <section aria-label="Recent expenses">
+          <RecentExpenses />
+        </section>
+        
+        {/* Payment Tracker */}
+        <section aria-label="Payment tracking">
+          <PaymentTracker />
+        </section>
+      </main>
+      
+      {/* Floating Action Buttons */}
+      <FAB />
+      
+      {/* Modals */}
+      <AddExpenseModal />
+      <AddRevenueModal />
     </div>
   );
 };
