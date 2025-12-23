@@ -10,6 +10,7 @@ import { PaymentTracker } from '@/components/dashboard/PaymentTracker';
 import { FAB } from '@/components/dashboard/FAB';
 import { AddExpenseModal } from '@/components/modals/AddExpenseModal';
 import { AddRevenueModal } from '@/components/modals/AddRevenueModal';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Index = () => {
   const { fetchDashboardData, isLoading } = useDashboardStore();
@@ -44,11 +45,14 @@ const Index = () => {
                 <p className="text-micro text-muted-foreground">Financial Dashboard</p>
               </div>
             </div>
-            <div className="text-right">
-              <p className="text-sm font-medium text-foreground">
-                {new Date().toLocaleDateString('en-KE', { weekday: 'long', day: 'numeric', month: 'short' })}
-              </p>
-              <p className="text-micro text-muted-foreground">Kenya</p>
+            <div className="flex items-center gap-4">
+              <ThemeToggle />
+              <div className="text-right">
+                <p className="text-sm font-medium text-foreground">
+                  {new Date().toLocaleDateString('en-KE', { weekday: 'long', day: 'numeric', month: 'short' })}
+                </p>
+                <p className="text-micro text-muted-foreground">Kenya</p>
+              </div>
             </div>
           </div>
         </div>
