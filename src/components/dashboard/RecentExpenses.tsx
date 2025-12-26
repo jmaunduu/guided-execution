@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { formatKES, formatDateStacked } from '@/lib/formatters';
 import { CATEGORY_CONFIG } from '@/types/dashboard';
-import { Plus, Trash2, Wheat, Wallet, Package, Boxes, Users, MoreHorizontal } from 'lucide-react';
+import { Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 export function RecentExpenses() {
@@ -66,17 +66,9 @@ export function RecentExpenses() {
                     </td>
                     <td className="p-4 py-3">
                       <div className="flex items-center gap-2">
-                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/50 border border-border/50">
-                          <div 
-                            className="w-3 h-3 rounded-full" 
-                            style={{ backgroundColor: config.icon === 'wheat' ? '#3B82F6' : config.icon === 'wallet' ? '#F97316' : config.icon === 'package' ? '#8B5CF6' : '#06B6D4' }}
-                          />
-                          {config.icon === 'wheat' && <Wheat className="w-3.5 h-3.5 text-muted-foreground" />}
-                          {config.icon === 'wallet' && <Users className="w-3.5 h-3.5 text-muted-foreground" />}
-                          {config.icon === 'package' && <Package className="w-3.5 h-3.5 text-muted-foreground" />}
-                          {config.icon === 'boxes' && <MoreHorizontal className="w-3.5 h-3.5 text-muted-foreground" />}
-                          <span className="text-xs text-muted-foreground">{config.label}</span>
-                        </div>
+                        <span className="px-3 py-1.5 rounded-lg bg-muted/50 border border-border/50 text-xs text-muted-foreground">
+                          {config.label}
+                        </span>
                       </div>
                     </td>
                     <td className={`p-4 py-3 text-right font-semibold text-sm ${
