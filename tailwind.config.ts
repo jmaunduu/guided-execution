@@ -88,6 +88,8 @@ export default {
         sm: "calc(var(--radius) - 8px)",
         button: "var(--radius-button)",
         input: "var(--radius-input)",
+        "2xl": "1.25rem",
+        "3xl": "1.5rem",
       },
       spacing: {
         "xs": "4px",
@@ -98,10 +100,11 @@ export default {
         "2xl": "48px",
       },
       fontSize: {
-        hero: ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "600" }],
+        hero: ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "hero-lg": ["56px", { lineHeight: "1.05", letterSpacing: "-0.02em", fontWeight: "700" }],
         heading: ["18px", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],
         body: ["14px", { lineHeight: "1.5", fontWeight: "400" }],
-        label: ["12px", { lineHeight: "1.4", letterSpacing: "0.01em", fontWeight: "500" }],
+        label: ["12px", { lineHeight: "1.4", letterSpacing: "0.05em", fontWeight: "500" }],
         micro: ["11px", { lineHeight: "1.3", fontWeight: "400" }],
       },
       boxShadow: {
@@ -110,6 +113,10 @@ export default {
         "farm-lg": "0 10px 30px rgba(0, 0, 0, 0.12)",
         "success": "0 4px 12px rgba(16, 185, 129, 0.4)",
         "danger": "0 4px 12px rgba(239, 68, 68, 0.4)",
+        "glow-blue": "0 0 40px rgba(59, 130, 246, 0.3), 0 8px 32px rgba(59, 130, 246, 0.15)",
+        "glow-orange": "0 0 40px rgba(249, 115, 22, 0.3), 0 8px 32px rgba(249, 115, 22, 0.15)",
+        "glow-green": "0 0 40px rgba(16, 185, 129, 0.3), 0 8px 32px rgba(16, 185, 129, 0.15)",
+        "card-hover": "0 16px 48px rgba(59, 130, 246, 0.2)",
       },
       keyframes: {
         "accordion-down": {
@@ -136,6 +143,18 @@ export default {
           from: { transform: "scale(0.95)", opacity: "0" },
           to: { transform: "scale(1)", opacity: "1" },
         },
+        "expand-down": {
+          from: { maxHeight: "0", opacity: "0" },
+          to: { maxHeight: "500px", opacity: "1" },
+        },
+        "glow-pulse": {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(59, 130, 246, 0.3)" },
+          "50%": { boxShadow: "0 0 40px rgba(59, 130, 246, 0.5)" },
+        },
+        "count-up": {
+          from: { opacity: "0", transform: "translateY(10px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -144,12 +163,18 @@ export default {
         "slide-up": "slide-up 0.3s ease-out",
         "fade-in": "fade-in 0.2s ease-out",
         "scale-in": "scale-in 0.25s ease-out",
+        "expand-down": "expand-down 0.4s ease-out",
+        "glow-pulse": "glow-pulse 2s ease-in-out infinite",
+        "count-up": "count-up 0.5s ease-out forwards",
       },
       transitionDuration: {
         DEFAULT: "200ms",
+        "300": "300ms",
+        "400": "400ms",
       },
       transitionTimingFunction: {
-        DEFAULT: "ease-in-out",
+        DEFAULT: "cubic-bezier(0.4, 0, 0.2, 1)",
+        "smooth": "cubic-bezier(0.4, 0, 0.2, 1)",
       },
     },
   },

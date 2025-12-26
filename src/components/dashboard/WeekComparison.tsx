@@ -1,7 +1,6 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { formatKES, formatPercentage } from '@/lib/formatters';
-import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
+import { ArrowUp, ArrowDown, Minus, Calendar } from 'lucide-react';
 
 export function WeekComparison() {
   const { getWeekComparison } = useDashboardStore();
@@ -20,8 +19,8 @@ export function WeekComparison() {
       thisWeek: comparison.thisWeek.costs, 
       lastWeek: comparison.lastWeek.costs,
       change: comparison.percentageChanges.costs,
-      isBetter: comparison.thisWeek.costs < comparison.lastWeek.costs, // Lower is better for costs
-      invertColor: true, // Lower costs = green, higher = red
+      isBetter: comparison.thisWeek.costs < comparison.lastWeek.costs,
+      invertColor: true,
     },
     { 
       label: 'Profit', 
@@ -46,6 +45,12 @@ export function WeekComparison() {
     return positive ? 'text-success' : 'text-danger';
   };
   
+  const getChangeBadge = (change: number, invertColor = false) => {
+    if (change === 0) return 'bg-secondary text-muted-foreground';
+    const positive = invertColor ? change < 0 : change > 0;
+    return positive ? 'metric-badge-success' : 'metric-badge-danger';
+  };
+  
   const getChangeIcon = (change: number) => {
     if (change === 0) return <Minus className="w-3 h-3" />;
     return change > 0 
@@ -54,15 +59,19 @@ export function WeekComparison() {
   };
   
   return (
-    <Card className="overflow-hidden">
-      <CardHeader className="pb-0">
-        <CardTitle className="text-heading">This Week vs Last Week</CardTitle>
-      </CardHeader>
-      <CardContent className="p-0 pt-4">
+    <div className="card-futuristic overflow-hidden">
+      <div className="p-5 pb-0 flex items-center gap-3">
+        <div className="icon-glow w-10 h-10">
+          <Calendar className="w-5 h-5 text-info" />
+        </div>
+        <h2 className="text-heading">This Week vs Last Week</h2>
+      </div>
+      
+      <div className="p-5 pt-4">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="table-futuristic">
             <thead>
-              <tr className="border-b border-border">
+              <tr>
                 <th className="text-left text-label text-muted-foreground font-medium p-4 pb-3"></th>
                 <th className="text-right text-label text-muted-foreground font-medium p-4 pb-3">This Week</th>
                 <th className="text-right text-label text-muted-foreground font-medium p-4 pb-3">Last Week</th>
@@ -70,18 +79,13 @@ export function WeekComparison() {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row, index) => (
-                <tr 
-                  key={row.label}
-                  className={`border-b border-border last:border-0 hover:bg-muted/50 transition-colors ${
-                    index % 2 === 1 ? 'bg-muted/20' : ''
-                  }`}
-                >
+              {rows.map((row) => (
+                <tr key={row.label}>
                   <td className="p-4 py-4">
                     <span className="font-medium text-sm">{row.label}</span>
                   </td>
                   <td className={`p-4 py-4 text-right font-semibold text-sm ${
-                    row.isBetter ? 'text-foreground' : ''
+                    row.isBetter ? 'text-foreground' : 'text-muted-foreground'
                   }`}>
                     {row.isCount 
                       ? row.thisWeek.toLocaleString() 
@@ -97,26 +101,17 @@ export function WeekComparison() {
                     }
                   </td>
                   <td className="p-4 py-4 text-right">
-                    <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-                      getChangeColor(row.change, row.invertColor)
-                    } ${
-                      row.change !== 0 
-                        ? (row.invertColor 
-                            ? (row.change < 0 ? 'bg-success/10' : 'bg-danger/10')
-                            : (row.change > 0 ? 'bg-success/10' : 'bg-danger/10')
-                          )
-                        : 'bg-muted'
-                    }`}>
+                    <span className={`metric-badge ${getChangeBadge(row.change, row.invertColor)}`}>
                       {getChangeIcon(row.change)}
                       {formatPercentage(row.change)}
-                    </div>
+                    </span>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

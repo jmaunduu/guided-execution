@@ -4,18 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Magolla Farm Design System - "Kenyan Earth + Tech Minimalism" */
+/* Magolla Farm Design System - "Futuristic Dark + Tech Minimalism" */
 
 @layer base {
   :root {
     /* Primary semantic colors */
     --success: 160 84% 39%;           /* #10B981 */
     --success-hover: 161 94% 31%;     /* #059669 */
-    --success-glow: 160 84% 39% / 0.4;
+    --success-glow: 160 84% 39%;
     
-    --warning: 38 92% 50%;            /* #F59E0B */
-    --warning-hover: 37 91% 45%;      /* #D97706 */
-    --warning-light: 45 93% 47%;      /* #FBBF24 */
+    --warning: 25 95% 53%;            /* #F97316 - Orange */
+    --warning-hover: 21 90% 48%;      /* #EA580C */
+    --warning-light: 32 95% 44%;      /* #D97706 */
     
     --danger: 0 84% 60%;              /* #EF4444 */
     --danger-hover: 0 74% 50%;        /* #DC2626 */
@@ -23,7 +23,8 @@
     
     --info: 217 91% 60%;              /* #3B82F6 */
     --info-hover: 221 83% 53%;        /* #2563EB */
-    --info-light: 217 91% 60% / 0.1;
+    --info-light: 217 91% 60%;
+    --info-glow: 217 91% 60%;
     
     /* Background & Surface */
     --background: 0 0% 98%;           /* #FAFAFA */
@@ -35,8 +36,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 221 39% 11%;
     
-    /* Primary brand - use success green */
-    --primary: 160 84% 39%;           /* #10B981 */
+    /* Primary brand - use blue */
+    --primary: 217 91% 60%;           /* #3B82F6 */
     --primary-foreground: 0 0% 100%;
     
     /* Secondary - subtle gray */
@@ -71,6 +72,8 @@
     --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
     --shadow-success: 0 4px 12px rgba(16, 185, 129, 0.4);
     --shadow-danger: 0 4px 12px rgba(239, 68, 68, 0.4);
+    --shadow-glow-blue: 0 0 40px rgba(59, 130, 246, 0.3);
+    --shadow-glow-orange: 0 0 40px rgba(249, 115, 22, 0.3);
     
     /* Text colors */
     --text-primary: 221 39% 11%;      /* #111827 */
@@ -89,39 +92,46 @@
   }
 
   .dark {
-    --background: 222 47% 11%;        /* #0F172A */
-    --foreground: 210 40% 96%;        /* #F1F5F9 */
+    /* Futuristic dark theme - deep blue-black base */
+    --background: 240 30% 4%;         /* #050510 - very dark blue-black */
+    --foreground: 210 40% 98%;        /* #F8FAFC - near-white */
     
-    --card: 217 33% 17%;              /* #1E293B */
-    --card-foreground: 210 40% 96%;
+    --card: 240 25% 8%;               /* #141420 - dark card surface */
+    --card-foreground: 210 40% 98%;
     
-    --popover: 217 33% 17%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 240 25% 8%;
+    --popover-foreground: 210 40% 98%;
     
-    --primary: 160 84% 39%;
+    /* Primary - bright blue for accents */
+    --primary: 217 91% 60%;           /* #3B82F6 */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 217 33% 22%;
-    --secondary-foreground: 210 40% 96%;
+    /* Secondary - orange for highlights */
+    --secondary: 240 20% 12%;         /* Darker surface */
+    --secondary-foreground: 210 40% 98%;
     
-    --muted: 217 33% 22%;
+    --muted: 240 20% 12%;
     --muted-foreground: 215 20% 65%;  /* #94A3B8 */
     
-    --accent: 217 33% 22%;
-    --accent-foreground: 210 40% 96%;
+    --accent: 240 20% 15%;
+    --accent-foreground: 210 40% 98%;
     
     --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 96%;
+    --destructive-foreground: 210 40% 98%;
     
-    --border: 215 28% 25%;            /* #334155 */
-    --input: 215 28% 25%;
+    /* Border with blue tint */
+    --border: 217 30% 20%;            /* Blue-tinted border */
+    --input: 217 30% 20%;
     --ring: 217 91% 60%;
     
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+    /* Glowing shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
+    --shadow-md: 0 8px 32px rgba(59, 130, 246, 0.1);
+    --shadow-lg: 0 16px 48px rgba(59, 130, 246, 0.15);
+    --shadow-glow-blue: 0 0 40px rgba(59, 130, 246, 0.4);
+    --shadow-glow-orange: 0 0 40px rgba(249, 115, 22, 0.4);
     
-    --text-primary: 210 40% 96%;
+    --text-primary: 210 40% 98%;
     --text-secondary: 215 20% 65%;
     --text-tertiary: 215 16% 47%;
     
@@ -148,7 +158,7 @@
   
   /* Typography hierarchy */
   .text-hero {
-    @apply text-5xl font-semibold tracking-tight leading-tight;
+    @apply text-5xl font-bold tracking-tight leading-tight;
     letter-spacing: -0.02em;
   }
   
@@ -162,8 +172,8 @@
   }
   
   .text-label {
-    @apply text-xs font-medium tracking-wide;
-    letter-spacing: 0.01em;
+    @apply text-xs font-medium uppercase tracking-wider;
+    letter-spacing: 0.05em;
   }
   
   .text-micro {
@@ -172,74 +182,130 @@
 }
 
 @layer components {
-  /* Card component styles */
-  .card-farm {
-    @apply bg-card rounded-2xl p-5 transition-all duration-200;
-    box-shadow: var(--shadow-sm);
-  }
-  
-  .card-farm:hover {
+  /* Futuristic card styles */
+  .card-futuristic {
+    @apply bg-card rounded-2xl transition-all duration-300;
+    border: 1px solid hsl(var(--border));
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
   }
   
-  /* Metric cards with status borders */
-  .card-metric {
-    @apply card-farm relative overflow-hidden;
+  .dark .card-futuristic {
+    background: linear-gradient(135deg, hsl(240 25% 8%) 0%, hsl(240 25% 6%) 100%);
+    border: 1px solid hsl(217 91% 60% / 0.2);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
   }
   
+  .card-futuristic:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  .dark .card-futuristic:hover {
+    box-shadow: 0 16px 48px rgba(59, 130, 246, 0.2);
+    border-color: hsl(217 91% 60% / 0.4);
+  }
+  
+  /* Glow effects */
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.2);
+  }
+  
+  .glow-orange {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.2);
+  }
+  
+  .glow-green {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), 0 0 40px rgba(16, 185, 129, 0.2);
+  }
+  
+  /* Icon container with glow */
+  .icon-glow {
+    @apply flex items-center justify-center rounded-xl transition-all duration-300;
+    background: linear-gradient(135deg, hsl(217 91% 60% / 0.15) 0%, hsl(217 91% 60% / 0.05) 100%);
+  }
+  
+  .icon-glow:hover {
+    background: linear-gradient(135deg, hsl(217 91% 60% / 0.25) 0%, hsl(217 91% 60% / 0.1) 100%);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  
+  /* Metric badge pill */
+  .metric-badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold;
+  }
+  
+  .metric-badge-success {
+    @apply bg-success/15 text-success;
+  }
+  
+  .metric-badge-danger {
+    @apply bg-danger/15 text-danger;
+  }
+  
+  .metric-badge-warning {
+    @apply bg-warning/15 text-warning;
+  }
+  
+  .metric-badge-info {
+    @apply bg-info/15 text-info;
+  }
+  
+  /* Card status borders */
   .card-metric-success {
-    @apply border-l-4 border-l-success;
+    border-left: 3px solid hsl(var(--success));
   }
   
   .card-metric-warning {
-    @apply border-l-4 border-l-warning;
+    border-left: 3px solid hsl(var(--warning));
   }
   
   .card-metric-danger {
-    @apply border-l-4 border-l-danger;
+    border-left: 3px solid hsl(var(--danger));
   }
   
-  /* Status badges */
-  .badge-success {
-    @apply bg-success/10 text-success;
+  .card-metric-info {
+    border-left: 3px solid hsl(var(--info));
   }
   
-  .badge-warning {
-    @apply bg-warning/10 text-warning;
+  /* Sub-card for expandable sections */
+  .sub-card {
+    @apply rounded-xl p-4 transition-all duration-200;
+    background: hsl(var(--background) / 0.5);
+    border: 1px solid hsl(var(--border) / 0.5);
   }
   
-  .badge-danger {
-    @apply bg-danger/10 text-danger;
+  .dark .sub-card {
+    background: linear-gradient(135deg, hsl(240 20% 6%) 0%, hsl(240 20% 4%) 100%);
+    border: 1px solid hsl(217 91% 60% / 0.1);
   }
   
-  .badge-info {
-    @apply bg-info/10 text-info;
+  .sub-card:hover {
+    border-color: hsl(217 91% 60% / 0.3);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1);
   }
   
   /* FAB styles */
   .fab {
-    @apply fixed z-50 rounded-full p-4 text-white font-semibold shadow-lg transition-all duration-200;
+    @apply fixed z-50 rounded-full p-4 text-white font-semibold transition-all duration-300;
     min-width: 56px;
     min-height: 56px;
   }
   
   .fab:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
   
   .fab:active {
-    transform: scale(0.98);
+    transform: scale(0.95);
   }
   
   .fab-success {
     @apply bg-success;
-    box-shadow: var(--shadow-success);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
   }
   
   .fab-danger {
-    @apply bg-danger;
-    box-shadow: var(--shadow-danger);
+    @apply bg-warning;
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4);
   }
   
   /* Skeleton loading */
@@ -249,28 +315,63 @@
   
   /* Health score gradients */
   .health-excellent {
-    background: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(161 94% 31%) 100%);
+    background: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(161 94% 25%) 100%);
   }
   
   .health-warning {
-    background: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(37 91% 45%) 100%);
+    background: linear-gradient(135deg, hsl(25 95% 53%) 0%, hsl(21 90% 45%) 100%);
   }
   
   .health-danger {
-    background: linear-gradient(135deg, hsl(0 84% 60%) 0%, hsl(0 74% 50%) 100%);
+    background: linear-gradient(135deg, hsl(0 84% 60%) 0%, hsl(0 74% 45%) 100%);
   }
   
   /* Payment status borders */
   .payment-paid {
-    @apply border-l-4 border-l-success;
+    border-left: 3px solid hsl(var(--success));
   }
   
   .payment-pending {
-    @apply border-l-4 border-l-warning;
+    border-left: 3px solid hsl(var(--warning));
   }
   
   .payment-overdue {
-    @apply border-l-4 border-l-danger;
+    border-left: 3px solid hsl(var(--danger));
+  }
+  
+  /* Table styles */
+  .table-futuristic {
+    @apply w-full;
+  }
+  
+  .table-futuristic thead tr {
+    @apply border-b;
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .table-futuristic thead tr {
+    border-color: hsl(217 91% 60% / 0.2);
+  }
+  
+  .table-futuristic tbody tr {
+    @apply border-b transition-colors;
+    border-color: hsl(var(--border) / 0.5);
+  }
+  
+  .dark .table-futuristic tbody tr {
+    border-color: hsl(217 91% 60% / 0.1);
+  }
+  
+  .dark .table-futuristic tbody tr:nth-child(odd) {
+    background: hsl(240 20% 6% / 0.5);
+  }
+  
+  .table-futuristic tbody tr:hover {
+    background: hsl(var(--muted) / 0.5);
+  }
+  
+  .dark .table-futuristic tbody tr:hover {
+    background: hsl(217 91% 60% / 0.05);
   }
 }
 
@@ -337,19 +438,23 @@
   }
   
   /* Semantic opacity variants */
-  .bg-success\/10 {
+  .bg-success\/10,
+  .bg-success\/15 {
     background-color: hsl(var(--success) / 0.1);
   }
   
-  .bg-warning\/10 {
+  .bg-warning\/10,
+  .bg-warning\/15 {
     background-color: hsl(var(--warning) / 0.1);
   }
   
-  .bg-danger\/10 {
+  .bg-danger\/10,
+  .bg-danger\/15 {
     background-color: hsl(var(--danger) / 0.1);
   }
   
-  .bg-info\/10 {
+  .bg-info\/10,
+  .bg-info\/15 {
     background-color: hsl(var(--info) / 0.1);
   }
   
@@ -364,5 +469,58 @@
   
   .border-l-danger {
     border-left-color: hsl(var(--danger));
+  }
+  
+  /* Gradient text */
+  .text-gradient-blue {
+    background: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(221 83% 70%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Animated counter */
+  @keyframes count-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-count-up {
+    animation: count-up 0.5s ease-out forwards;
+  }
+  
+  /* Expand animation */
+  @keyframes expand-down {
+    from { 
+      max-height: 0; 
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to { 
+      max-height: 500px; 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-expand-down {
+    animation: expand-down 0.4s ease-out forwards;
+    overflow: hidden;
+  }
+  
+  @keyframes collapse-up {
+    from { 
+      max-height: 500px; 
+      opacity: 1;
+    }
+    to { 
+      max-height: 0; 
+      opacity: 0;
+    }
+  }
+  
+  .animate-collapse-up {
+    animation: collapse-up 0.3s ease-out forwards;
+    overflow: hidden;
   }
 }
