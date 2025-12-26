@@ -90,9 +90,7 @@ export function HeroMetrics() {
         >
           <div className="flex items-start justify-between mb-2">
             <p className="text-label text-muted-foreground">Today's Revenue</p>
-            <div className="icon-glow w-10 h-10">
-              <TrendingUp className="w-5 h-5 text-info" />
-            </div>
+            <TrendingUp className="w-5 h-5 text-primary" />
           </div>
           
           <h2 className="text-4xl lg:text-hero font-bold text-foreground tracking-tight animate-count-up">
@@ -115,14 +113,27 @@ export function HeroMetrics() {
             <span className="text-muted-foreground ml-2 text-xs">vs yesterday</span>
           </div>
           
-          <Sparkline 
-            data={last7DaysRevenue} 
-            color="blue"
-            height={40}
-            className="mt-4"
-          />
+          {/* Insight section */}
+          <div className="mt-4 pt-3 border-t border-border/30">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground">Weekly avg:</span>
+              <span className="font-medium text-foreground">{formatKES(last7DaysRevenue.reduce((a, b) => a + b, 0) / 7)}</span>
+            </div>
+            <Sparkline 
+              data={last7DaysRevenue} 
+              color="blue"
+              height={32}
+              className="mt-2"
+            />
+            <div className="flex items-center justify-between text-xs mt-2">
+              <span className="text-muted-foreground">7-day trend</span>
+              <span className={`font-medium ${last7DaysRevenue[6] > last7DaysRevenue[0] ? 'text-primary' : 'text-secondary'}`}>
+                {last7DaysRevenue[6] > last7DaysRevenue[0] ? '↑ Growing' : '↓ Declining'}
+              </span>
+            </div>
+          </div>
           
-          <div className="absolute inset-0 bg-gradient-to-br from-info/5 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         
         {/* Today's Profit */}
@@ -134,15 +145,9 @@ export function HeroMetrics() {
         >
           <div className="flex items-start justify-between mb-2">
             <p className="text-label text-muted-foreground">Today's Profit</p>
-            <div className={`icon-glow w-10 h-10 ${
-              todayMetrics.profit >= 0 
-                ? 'bg-success/10' 
-                : 'bg-danger/10'
-            }`}>
-              <BarChart3 className={`w-5 h-5 ${
-                todayMetrics.profit >= 0 ? 'text-success' : 'text-danger'
-              }`} />
-            </div>
+            <BarChart3 className={`w-5 h-5 ${
+              todayMetrics.profit >= 0 ? 'text-primary' : 'text-secondary'
+            }`} />
           </div>
           
           <h2 className={`text-4xl lg:text-hero font-bold tracking-tight animate-count-up ${
@@ -162,17 +167,28 @@ export function HeroMetrics() {
             </span>
           </div>
           
-          <Sparkline 
-            data={last7DaysProfit} 
-            color={todayMetrics.profit >= 0 ? "blue" : "orange"}
-            height={40}
-            className="mt-4"
-          />
+          {/* Insight section */}
+          <div className="mt-4 pt-3 border-t border-border/30">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground">Weekly total:</span>
+              <span className={`font-medium ${weeklyProfit >= 0 ? 'text-primary' : 'text-secondary'}`}>{formatKES(weeklyProfit)}</span>
+            </div>
+            <Sparkline 
+              data={last7DaysProfit} 
+              color={todayMetrics.profit >= 0 ? "blue" : "orange"}
+              height={32}
+              className="mt-2"
+            />
+            <div className="flex items-center justify-between text-xs mt-2">
+              <span className="text-muted-foreground">Avg margin</span>
+              <span className="font-medium text-foreground">{profitMargin.toFixed(0)}%</span>
+            </div>
+          </div>
           
           <div className={`absolute inset-0 bg-gradient-to-br pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
             todayMetrics.profit >= 0 
-              ? 'from-success/5 to-transparent' 
-              : 'from-danger/5 to-transparent'
+              ? 'from-primary/5 to-transparent' 
+              : 'from-secondary/5 to-transparent'
           }`} />
         </div>
         
@@ -187,9 +203,7 @@ export function HeroMetrics() {
         >
           <div className="flex items-start justify-between mb-2">
             <p className="text-label text-muted-foreground">Cash Available</p>
-            <div className="icon-glow w-10 h-10">
-              <Wallet className="w-5 h-5 text-info" />
-            </div>
+            <Wallet className="w-5 h-5 text-primary" />
           </div>
           
           <h2 className="text-4xl lg:text-hero font-bold text-foreground tracking-tight animate-count-up">
@@ -220,17 +234,11 @@ export function HeroMetrics() {
         >
           <div className="flex items-start justify-between mb-2">
             <p className="text-label text-muted-foreground">Feed Inventory</p>
-            <div className={`icon-glow w-10 h-10 ${
-              feedStatus === 'success' ? 'bg-success/10' :
-              feedStatus === 'warning' ? 'bg-warning/10' :
-              'bg-danger/10'
-            }`}>
-              <Package className={`w-5 h-5 ${
-                feedStatus === 'success' ? 'text-success' :
-                feedStatus === 'warning' ? 'text-warning' :
-                'text-danger'
-              }`} />
-            </div>
+            <Package className={`w-5 h-5 ${
+              feedStatus === 'success' ? 'text-primary' :
+              feedStatus === 'warning' ? 'text-secondary' :
+              'text-secondary'
+            }`} />
           </div>
           
           <h2 className="text-4xl lg:text-hero font-bold text-foreground tracking-tight animate-count-up">
@@ -258,13 +266,9 @@ export function HeroMetrics() {
           )}
           
           <div className="mt-4">
-            <div className="w-full bg-secondary rounded-full h-2">
+            <div className="w-full h-2 rounded-full border border-border/50 bg-transparent">
               <div 
-                className={`h-2 rounded-full transition-all duration-500 ${
-                  daysUntilFeedRestock < 7 ? 'bg-danger' :
-                  daysUntilFeedRestock < 14 ? 'bg-warning' :
-                  'bg-success'
-                }`}
+                className="h-full rounded-full transition-all duration-500 bg-primary"
                 style={{ width: `${Math.min(100, (daysUntilFeedRestock / 30) * 100)}%` }}
               />
             </div>
@@ -423,9 +427,7 @@ export function HeroMetrics() {
               return (
                 <div key={balance.account} className="sub-card">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-secondary">
-                      <IconComponent className={`w-5 h-5 ${colorClass}`} />
-                    </div>
+                    <IconComponent className={`w-5 h-5 ${colorClass}`} />
                     <span className="font-medium capitalize">
                       {balance.account === 'mpesa' ? 'M-Pesa' : balance.account.toUpperCase()}
                     </span>
@@ -434,14 +436,9 @@ export function HeroMetrics() {
                     <span className="text-2xl font-bold">{formatKES(balance.balance)}</span>
                     <span className="metric-badge metric-badge-info">{percentage}%</span>
                   </div>
-                  <div className="mt-3 w-full bg-secondary rounded-full h-2">
+                  <div className="mt-3 w-full h-2 rounded-full border border-border/50 bg-transparent">
                     <div 
-                      className={`h-2 rounded-full ${
-                        balance.account === 'mpesa' ? 'bg-success' :
-                        balance.account === 'kcb' ? 'bg-info' :
-                        balance.account === 'absa' ? 'bg-warning' :
-                        'bg-muted-foreground'
-                      }`}
+                      className="h-full rounded-full bg-primary"
                       style={{ width: `${percentage}%` }}
                     />
                   </div>
@@ -496,13 +493,9 @@ export function HeroMetrics() {
         
         <div className="sub-card">
           <h4 className="font-semibold mb-4">Stock Level</h4>
-          <div className="w-full bg-secondary rounded-full h-4">
+          <div className="w-full h-4 rounded-full border border-border/50 bg-transparent">
             <div 
-              className={`h-4 rounded-full transition-all duration-500 ${
-                feedStatus === 'danger' ? 'bg-danger' :
-                feedStatus === 'warning' ? 'bg-warning' :
-                'bg-success'
-              }`}
+              className="h-full rounded-full transition-all duration-500 bg-primary"
               style={{ width: `${Math.min(100, (daysUntilFeedRestock / 30) * 100)}%` }}
             />
           </div>
