@@ -176,22 +176,11 @@ const Analytics = () => {
         <CardContent>
           {chartType === 'pie' ? (
             <div className="h-80 flex items-center justify-center">
-              <DonutChart 
-                data={[
-                  { name: 'Feeds', value: costBreakdown.feeds, color: 'hsl(217, 91%, 60%)' },
-                  { name: 'Salaries', value: costBreakdown.salaries, color: 'hsl(25, 95%, 53%)' },
-                  { name: 'Supplies', value: costBreakdown.supplies, color: 'hsl(270, 70%, 60%)' },
-                  { name: 'Misc', value: costBreakdown.miscellaneous, color: 'hsl(190, 90%, 50%)' },
-                ]}
-              />
+              <DonutChart data={costBreakdown} height={320} />
             </div>
           ) : (
             <div className="h-80">
-              <TrendAreaChart 
-                data={trendData} 
-                chartType={chartType as 'line' | 'bar'}
-                showMetrics={selectedMetric === 'All' ? ['revenue', 'profit', 'expenses'] : [selectedMetric.toLowerCase()]}
-              />
+              <TrendAreaChart data={trendData} height={320} />
             </div>
           )}
         </CardContent>
