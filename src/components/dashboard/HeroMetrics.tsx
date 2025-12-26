@@ -427,7 +427,7 @@ export function HeroMetrics() {
               return (
                 <div key={balance.account} className="sub-card">
                   <div className="flex items-center gap-3 mb-3">
-                    <IconComponent className={`w-5 h-5 ${colorClass}`} />
+                    <IconComponent className="w-5 h-5 text-primary" />
                     <span className="font-medium capitalize">
                       {balance.account === 'mpesa' ? 'M-Pesa' : balance.account.toUpperCase()}
                     </span>
