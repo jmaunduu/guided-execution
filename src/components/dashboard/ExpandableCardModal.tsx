@@ -47,50 +47,66 @@ export function ExpandableCardModal({
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay animate-fade-in" onClick={onClose}>
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+      onClick={onClose}
+    >
+      {/* Glassmorphic backdrop */}
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-md animate-fade-in" />
+      
+      {/* Modal content - 2/3 screen size */}
       <div 
-        className="fixed inset-4 md:inset-8 lg:inset-12 xl:inset-16 z-50 flex items-center justify-center"
+        className={cn(
+          "relative w-full max-w-4xl max-h-[70vh] overflow-auto",
+          "rounded-3xl border border-border/50",
+          "bg-card/80 backdrop-blur-xl",
+          "shadow-2xl shadow-black/50",
+          "animate-scale-in"
+        )}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="expanded-card w-full h-full max-h-[90vh] overflow-auto animate-modal-in">
-          {/* Header */}
-          <div className={cn(
-            "sticky top-0 z-10 p-6 border-b border-border/30",
-            "bg-gradient-to-r",
-            accentColor === 'blue' 
-              ? "from-primary/10 via-transparent to-transparent" 
-              : "from-secondary/10 via-transparent to-transparent"
-          )}>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                {icon && (
-                  <div className={cn(
-                    "p-3 rounded-xl",
-                    accentColor === 'blue' ? "icon-glow" : "icon-glow-orange"
-                  )}>
-                    {icon}
-                  </div>
-                )}
-                <div>
-                  <h2 className="text-2xl font-bold text-foreground">{title}</h2>
-                  {subtitle && (
-                    <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>
-                  )}
+        {/* Glow effect based on accent color */}
+        <div className={cn(
+          "absolute -inset-px rounded-3xl opacity-50 blur-sm -z-10",
+          accentColor === 'blue' 
+            ? "bg-gradient-to-br from-primary/30 via-transparent to-primary/10" 
+            : "bg-gradient-to-br from-secondary/30 via-transparent to-secondary/10"
+        )} />
+        
+        {/* Header */}
+        <div className={cn(
+          "sticky top-0 z-10 p-6 border-b border-border/30 rounded-t-3xl",
+          "bg-card/90 backdrop-blur-lg"
+        )}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              {icon && (
+                <div className={cn(
+                  "p-3 rounded-xl",
+                  accentColor === 'blue' ? "icon-glow" : "icon-glow-orange"
+                )}>
+                  {icon}
                 </div>
+              )}
+              <div>
+                <h2 className="text-2xl font-bold text-foreground">{title}</h2>
+                {subtitle && (
+                  <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>
+                )}
               </div>
-              <button
-                onClick={onClose}
-                className="p-2 rounded-xl hover:bg-muted transition-colors"
-              >
-                <X className="w-6 h-6 text-muted-foreground" />
-              </button>
             </div>
+            <button
+              onClick={onClose}
+              className="p-2 rounded-xl hover:bg-muted/50 transition-colors backdrop-blur-sm"
+            >
+              <X className="w-6 h-6 text-muted-foreground" />
+            </button>
           </div>
+        </div>
 
-          {/* Content */}
-          <div className="p-6">
-            {children}
-          </div>
+        {/* Content */}
+        <div className="p-6">
+          {children}
         </div>
       </div>
     </div>
