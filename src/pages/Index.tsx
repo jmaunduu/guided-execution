@@ -11,6 +11,7 @@ import { FAB } from '@/components/dashboard/FAB';
 import { AddExpenseModal } from '@/components/modals/AddExpenseModal';
 import { AddRevenueModal } from '@/components/modals/AddRevenueModal';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { Leaf } from 'lucide-react';
 
 const Index = () => {
   const { fetchDashboardData, isLoading } = useDashboardStore();
@@ -23,8 +24,8 @@ const Index = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-            <span className="text-4xl">🐔</span>
+          <div className="w-16 h-16 bg-info/10 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <Leaf className="w-8 h-8 text-info" />
           </div>
           <p className="text-muted-foreground">Loading your dashboard...</p>
         </div>
@@ -35,11 +36,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-30">
+      <header className="bg-card border-b border-border sticky top-0 z-30 backdrop-blur-md bg-card/80">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="text-3xl">🐔</span>
+              <div className="w-10 h-10 rounded-xl bg-info/10 flex items-center justify-center">
+                <Leaf className="w-5 h-5 text-info" />
+              </div>
               <div>
                 <h1 className="text-heading font-bold text-foreground">Magolla Farm</h1>
                 <p className="text-micro text-muted-foreground">Financial Dashboard</p>
@@ -60,46 +63,36 @@ const Index = () => {
       
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 pb-24 space-y-6">
-        {/* Hero Metrics */}
         <section aria-label="Key metrics">
           <HeroMetrics />
         </section>
         
-        {/* Financial Health Score */}
         <section aria-label="Financial health">
           <HealthScore />
         </section>
         
-        {/* Week Comparison */}
         <section aria-label="Weekly comparison">
           <WeekComparison />
         </section>
         
-        {/* Trend Charts */}
         <section aria-label="Trends">
           <TrendCharts />
         </section>
         
-        {/* Quick Metrics */}
         <section aria-label="Quick metrics">
           <QuickMetrics />
         </section>
         
-        {/* Recent Expenses */}
         <section aria-label="Recent expenses">
           <RecentExpenses />
         </section>
         
-        {/* Payment Tracker */}
         <section aria-label="Payment tracking">
           <PaymentTracker />
         </section>
       </main>
       
-      {/* Floating Action Buttons */}
       <FAB />
-      
-      {/* Modals */}
       <AddExpenseModal />
       <AddRevenueModal />
     </div>
