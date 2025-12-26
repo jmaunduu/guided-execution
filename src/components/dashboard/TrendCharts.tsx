@@ -2,14 +2,14 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { TrendAreaChart } from '@/components/charts/TrendAreaChart';
 import { DonutChart } from '@/components/charts/DonutChart';
 import { useDashboardStore } from '@/stores/dashboardStore';
-
 export function TrendCharts() {
-  const { getTrendData, getCostBreakdown } = useDashboardStore();
+  const {
+    getTrendData,
+    getCostBreakdown
+  } = useDashboardStore();
   const trendData = getTrendData();
   const costBreakdown = getCostBreakdown();
-  
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  return <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       {/* Revenue & Profit Trend */}
       <Card>
         <CardHeader className="pb-2">
@@ -20,7 +20,7 @@ export function TrendCharts() {
               <span className="text-micro text-muted-foreground">Revenue</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-success" />
+              <div className="w-3 h-3 rounded-full bg-secondary" />
               <span className="text-micro text-muted-foreground">Profit</span>
             </div>
           </div>
@@ -39,6 +39,5 @@ export function TrendCharts() {
           <DonutChart data={costBreakdown} />
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>;
 }
