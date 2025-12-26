@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { formatKES, formatDateStacked } from '@/lib/formatters';
 import { CATEGORY_CONFIG } from '@/types/dashboard';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, Wheat, Wallet, Package, Boxes } from 'lucide-react';
 import { useState } from 'react';
 
 export function RecentExpenses() {
@@ -66,8 +66,11 @@ export function RecentExpenses() {
                     </td>
                     <td className="p-4 py-3">
                       <div className="flex items-center gap-2">
-                        <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-lg bg-${config.color}/10`}>
-                          {config.icon}
+                        <span className="w-8 h-8 rounded-lg flex items-center justify-center text-primary">
+                          {config.icon === 'wheat' && <Wheat className="w-5 h-5" />}
+                          {config.icon === 'wallet' && <Wallet className="w-5 h-5" />}
+                          {config.icon === 'package' && <Package className="w-5 h-5" />}
+                          {config.icon === 'boxes' && <Boxes className="w-5 h-5" />}
                         </span>
                         <span className="font-medium text-sm">{config.label}</span>
                       </div>
