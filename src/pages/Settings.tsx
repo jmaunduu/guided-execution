@@ -12,77 +12,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { 
   User, Building2, Plug, Bell, Shield, Database, 
   Camera, Globe, Clock, DollarSign, Plus, Trash2, 
-  Copy, ExternalLink, Search, Key, Webhook, Check,
+  Copy, ExternalLink, Key, Webhook,
   Smartphone, Monitor, LogOut, Download
 } from 'lucide-react';
-
-// Integration categories
-const integrations = {
-  accounting: [
-    { id: 'quickbooks', name: 'QuickBooks', connected: false },
-    { id: 'xero', name: 'Xero', connected: false },
-    { id: 'freshbooks', name: 'FreshBooks', connected: false },
-    { id: 'wave', name: 'Wave', connected: false },
-    { id: 'sage', name: 'Sage', connected: false },
-    { id: 'myob', name: 'MYOB', connected: false },
-    { id: 'zohobooks', name: 'Zoho Books', connected: false },
-  ],
-  banking: [
-    { id: 'mpesa', name: 'M-Pesa', connected: true },
-    { id: 'paypal', name: 'PayPal', connected: false },
-    { id: 'stripe', name: 'Stripe', connected: false },
-    { id: 'square', name: 'Square', connected: false },
-    { id: 'plaid', name: 'Plaid', connected: false },
-    { id: 'kcb', name: 'KCB', connected: true },
-    { id: 'absa', name: 'ABSA', connected: true },
-    { id: 'equity', name: 'Equity Bank', connected: false },
-  ],
-  ecommerce: [
-    { id: 'shopify', name: 'Shopify', connected: false },
-    { id: 'woocommerce', name: 'WooCommerce', connected: false },
-    { id: 'magento', name: 'Magento', connected: false },
-    { id: 'bigcommerce', name: 'BigCommerce', connected: false },
-    { id: 'prestashop', name: 'PrestaShop', connected: false },
-  ],
-  communication: [
-    { id: 'slack', name: 'Slack', connected: false },
-    { id: 'discord', name: 'Discord', connected: false },
-    { id: 'telegram', name: 'Telegram', connected: false },
-    { id: 'email', name: 'Email', connected: true },
-    { id: 'twilio', name: 'Twilio SMS', connected: false },
-    { id: 'africastalking', name: "Africa's Talking", connected: false },
-    { id: 'whatsapp', name: 'WhatsApp Business', connected: false },
-  ],
-  productivity: [
-    { id: 'google', name: 'Google Workspace', connected: false },
-    { id: 'microsoft', name: 'Microsoft 365', connected: false },
-    { id: 'trello', name: 'Trello', connected: false },
-    { id: 'asana', name: 'Asana', connected: false },
-    { id: 'monday', name: 'Monday.com', connected: false },
-  ],
-  crm: [
-    { id: 'salesforce', name: 'Salesforce', connected: false },
-    { id: 'hubspot', name: 'HubSpot', connected: false },
-    { id: 'pipedrive', name: 'Pipedrive', connected: false },
-    { id: 'zohocrm', name: 'Zoho CRM', connected: false },
-  ],
-  storage: [
-    { id: 'gdrive', name: 'Google Drive', connected: false },
-    { id: 'dropbox', name: 'Dropbox', connected: false },
-    { id: 'onedrive', name: 'OneDrive', connected: false },
-    { id: 'box', name: 'Box', connected: false },
-  ],
-  analytics: [
-    { id: 'ga', name: 'Google Analytics', connected: false },
-    { id: 'mixpanel', name: 'Mixpanel', connected: false },
-    { id: 'amplitude', name: 'Amplitude', connected: false },
-  ],
-  automation: [
-    { id: 'zapier', name: 'Zapier', connected: false },
-    { id: 'make', name: 'Make', connected: false },
-    { id: 'n8n', name: 'n8n', connected: false },
-  ],
-};
 
 const webhookEvents = [
   'transaction.created',
@@ -94,25 +26,17 @@ const webhookEvents = [
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('profile');
-  const [integrationSearch, setIntegrationSearch] = useState('');
   const [showWebhookModal, setShowWebhookModal] = useState(false);
   const [showApiKeyModal, setShowApiKeyModal] = useState(false);
 
   const tabs = [
     { id: 'profile', label: 'Profile & Account', icon: User },
     { id: 'business', label: 'Business Information', icon: Building2 },
-    { id: 'integrations', label: 'Integrations & APIs', icon: Plug },
+    { id: 'integrations', label: 'Custom Integrations', icon: Plug },
     { id: 'notifications', label: 'Notifications', icon: Bell },
     { id: 'security', label: 'Security', icon: Shield },
     { id: 'data', label: 'Data & Backup', icon: Database },
   ];
-
-  const filterIntegrations = (items: typeof integrations.accounting) => {
-    if (!integrationSearch) return items;
-    return items.filter(item => 
-      item.name.toLowerCase().includes(integrationSearch.toLowerCase())
-    );
-  };
 
   return (
     <div className="space-y-6">
@@ -305,66 +229,9 @@ const Settings = () => {
           </Card>
         </TabsContent>
 
-        {/* Integrations & APIs */}
+        {/* Custom Integrations */}
         <TabsContent value="integrations">
           <div className="space-y-6">
-            {/* Search and Actions */}
-            <Card className="card-glass">
-              <CardContent className="p-4">
-                <div className="flex flex-wrap gap-4">
-                  <div className="relative flex-1 min-w-[200px]">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      placeholder="Search integrations..."
-                      value={integrationSearch}
-                      onChange={(e) => setIntegrationSearch(e.target.value)}
-                      className="pl-9"
-                    />
-                  </div>
-                  <Button variant="outline">Request Integration</Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Integration Categories */}
-            {Object.entries(integrations).map(([category, items]) => {
-              const filtered = filterIntegrations(items);
-              if (filtered.length === 0) return null;
-              return (
-                <Card key={category} className="card-glass">
-                  <CardHeader>
-                    <CardTitle className="text-base capitalize">{category}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                      {filtered.map((integration) => (
-                        <div
-                          key={integration.id}
-                          className="p-3 rounded-xl bg-muted/30 border border-border/50 flex items-center justify-between"
-                        >
-                          <span className="text-sm font-medium">{integration.name}</span>
-                          <Button
-                            size="sm"
-                            variant={integration.connected ? 'default' : 'outline'}
-                            className={integration.connected ? 'bg-success hover:bg-success/90' : ''}
-                          >
-                            {integration.connected ? (
-                              <>
-                                <Check className="w-3 h-3 mr-1" />
-                                Connected
-                              </>
-                            ) : (
-                              'Connect'
-                            )}
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-
             {/* Webhook Management */}
             <Card className="card-glass">
               <CardHeader>
@@ -374,7 +241,7 @@ const Settings = () => {
                       <Webhook className="w-4 h-4" />
                       Webhook Management
                     </CardTitle>
-                    <CardDescription>Configure webhooks to receive real-time updates</CardDescription>
+                    <CardDescription>Configure webhooks to receive real-time updates from external services</CardDescription>
                   </div>
                   <Dialog open={showWebhookModal} onOpenChange={setShowWebhookModal}>
                     <DialogTrigger asChild>
@@ -389,15 +256,19 @@ const Settings = () => {
                       </DialogHeader>
                       <div className="space-y-4">
                         <div>
+                          <Label htmlFor="webhookName">Webhook Name</Label>
+                          <Input id="webhookName" placeholder="e.g., Payment Notifications" className="mt-1" />
+                        </div>
+                        <div>
                           <Label htmlFor="webhookUrl">Webhook URL</Label>
                           <Input id="webhookUrl" placeholder="https://your-server.com/webhook" className="mt-1" />
                         </div>
                         <div>
-                          <Label htmlFor="secretKey">Secret Key</Label>
-                          <Input id="secretKey" type="password" className="mt-1" />
+                          <Label htmlFor="secretKey">Secret Key (Optional)</Label>
+                          <Input id="secretKey" type="password" placeholder="For signature verification" className="mt-1" />
                         </div>
                         <div>
-                          <Label>Events</Label>
+                          <Label>Events to Subscribe</Label>
                           <div className="mt-2 space-y-2">
                             {webhookEvents.map((event) => (
                               <label key={event} className="flex items-center gap-2 cursor-pointer">
@@ -424,7 +295,11 @@ const Settings = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground text-center py-8">No webhooks configured yet</p>
+                <div className="text-center py-8">
+                  <Webhook className="w-12 h-12 mx-auto text-muted-foreground/50 mb-3" />
+                  <p className="text-sm text-muted-foreground mb-2">No webhooks configured yet</p>
+                  <p className="text-xs text-muted-foreground">Add a webhook to receive real-time notifications when events occur</p>
+                </div>
               </CardContent>
             </Card>
 
@@ -437,7 +312,7 @@ const Settings = () => {
                       <Key className="w-4 h-4" />
                       API Keys
                     </CardTitle>
-                    <CardDescription>Manage API keys for programmatic access</CardDescription>
+                    <CardDescription>Generate API keys for programmatic access to your data</CardDescription>
                   </div>
                   <Dialog open={showApiKeyModal} onOpenChange={setShowApiKeyModal}>
                     <DialogTrigger asChild>
@@ -456,6 +331,10 @@ const Settings = () => {
                           <Input id="keyName" placeholder="e.g., Production API Key" className="mt-1" />
                         </div>
                         <div>
+                          <Label htmlFor="keyDescription">Description (Optional)</Label>
+                          <Input id="keyDescription" placeholder="What will this key be used for?" className="mt-1" />
+                        </div>
+                        <div>
                           <Label>Permissions</Label>
                           <div className="mt-2 space-y-2">
                             {['Read transactions', 'Write transactions', 'Generate reports', 'Manage webhooks'].map((perm) => (
@@ -466,6 +345,20 @@ const Settings = () => {
                             ))}
                           </div>
                         </div>
+                        <div>
+                          <Label>Expiration</Label>
+                          <Select defaultValue="never">
+                            <SelectTrigger className="mt-1">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="never">Never expires</SelectItem>
+                              <SelectItem value="30">30 days</SelectItem>
+                              <SelectItem value="90">90 days</SelectItem>
+                              <SelectItem value="365">1 year</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
                         <Button className="w-full">Generate Key</Button>
                       </div>
                     </DialogContent>
@@ -474,10 +367,16 @@ const Settings = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm text-muted-foreground">No API keys created yet</p>
+                  <div className="text-center py-8 flex-1">
+                    <Key className="w-12 h-12 mx-auto text-muted-foreground/50 mb-3" />
+                    <p className="text-sm text-muted-foreground mb-2">No API keys created yet</p>
+                    <p className="text-xs text-muted-foreground">Generate a key to access your data programmatically</p>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border flex justify-end">
                   <Button variant="link" size="sm" className="gap-1">
                     <ExternalLink className="w-3 h-3" />
-                    API Docs
+                    View API Documentation
                   </Button>
                 </div>
               </CardContent>
