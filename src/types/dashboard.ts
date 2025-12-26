@@ -125,11 +125,11 @@ export interface FinancialHealthData {
 }
 
 // Category display config
-export const CATEGORY_CONFIG: Record<ExpenseCategory, { icon: string; label: string; color: string }> = {
-  feeds: { icon: '🌾', label: 'Feeds', color: 'warning' },
-  salaries: { icon: '💰', label: 'Salaries', color: 'info' },
-  supplies: { icon: '🏥', label: 'Supplies', color: 'success' },
-  miscellaneous: { icon: '📦', label: 'Miscellaneous', color: 'muted' },
+export const CATEGORY_CONFIG: Record<ExpenseCategory, { icon: 'wheat' | 'wallet' | 'package' | 'boxes'; label: string; color: string }> = {
+  feeds: { icon: 'wheat', label: 'Feeds', color: 'warning' },
+  salaries: { icon: 'wallet', label: 'Salaries', color: 'info' },
+  supplies: { icon: 'package', label: 'Supplies', color: 'success' },
+  miscellaneous: { icon: 'boxes', label: 'Miscellaneous', color: 'muted' },
 };
 
 export const PAYMENT_METHOD_CONFIG: Record<PaymentMethod, { icon: string; label: string }> = {
