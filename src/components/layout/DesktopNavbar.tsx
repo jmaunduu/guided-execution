@@ -71,12 +71,12 @@ export function DesktopNavbar() {
           </nav>
 
           {/* Right: Logo */}
-          <div className="flex items-center gap-3">
-            <div className="text-right">
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="text-right whitespace-nowrap">
               <p className="text-sm font-semibold text-foreground">Magolla Farm</p>
               <p className="text-micro text-muted-foreground">Financial Dashboard</p>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
               <Leaf className="w-5 h-5 text-primary" />
             </div>
           </div>
