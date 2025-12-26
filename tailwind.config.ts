@@ -29,6 +29,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -64,7 +65,7 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Semantic colors
+        // Semantic colors - blue/orange focused
         success: {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(0 0% 100%)",
@@ -80,6 +81,13 @@ export default {
         info: {
           DEFAULT: "hsl(var(--info))",
           foreground: "hsl(0 0% 100%)",
+        },
+        // Chart colors
+        chart: {
+          blue: "hsl(var(--chart-blue))",
+          orange: "hsl(var(--chart-orange))",
+          purple: "hsl(var(--chart-purple))",
+          cyan: "hsl(var(--chart-cyan))",
         },
       },
       borderRadius: {
@@ -108,15 +116,15 @@ export default {
         micro: ["11px", { lineHeight: "1.3", fontWeight: "400" }],
       },
       boxShadow: {
-        farm: "0 1px 3px rgba(0, 0, 0, 0.08)",
-        "farm-md": "0 4px 12px rgba(0, 0, 0, 0.1)",
-        "farm-lg": "0 10px 30px rgba(0, 0, 0, 0.12)",
-        "success": "0 4px 12px rgba(16, 185, 129, 0.4)",
+        farm: "0 1px 3px rgba(0, 0, 0, 0.6)",
+        "farm-md": "0 8px 32px rgba(59, 130, 246, 0.1)",
+        "farm-lg": "0 16px 48px rgba(59, 130, 246, 0.15)",
+        "success": "0 4px 12px rgba(59, 130, 246, 0.4)",
         "danger": "0 4px 12px rgba(239, 68, 68, 0.4)",
-        "glow-blue": "0 0 40px rgba(59, 130, 246, 0.3), 0 8px 32px rgba(59, 130, 246, 0.15)",
-        "glow-orange": "0 0 40px rgba(249, 115, 22, 0.3), 0 8px 32px rgba(249, 115, 22, 0.15)",
-        "glow-green": "0 0 40px rgba(16, 185, 129, 0.3), 0 8px 32px rgba(16, 185, 129, 0.15)",
-        "card-hover": "0 16px 48px rgba(59, 130, 246, 0.2)",
+        "glow-blue": "0 0 40px rgba(59, 130, 246, 0.4), 0 8px 32px rgba(59, 130, 246, 0.2)",
+        "glow-orange": "0 0 40px rgba(249, 115, 22, 0.4), 0 8px 32px rgba(249, 115, 22, 0.2)",
+        "card-hover": "0 20px 60px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1)",
+        "modal": "0 32px 80px rgba(0, 0, 0, 0.5), 0 0 80px rgba(59, 130, 246, 0.15)",
       },
       keyframes: {
         "accordion-down": {
@@ -149,11 +157,15 @@ export default {
         },
         "glow-pulse": {
           "0%, 100%": { boxShadow: "0 0 20px rgba(59, 130, 246, 0.3)" },
-          "50%": { boxShadow: "0 0 40px rgba(59, 130, 246, 0.5)" },
+          "50%": { boxShadow: "0 0 40px rgba(59, 130, 246, 0.6)" },
         },
         "count-up": {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "modal-in": {
+          from: { opacity: "0", transform: "scale(0.95) translateY(10px)" },
+          to: { opacity: "1", transform: "scale(1) translateY(0)" },
         },
       },
       animation: {
@@ -166,6 +178,7 @@ export default {
         "expand-down": "expand-down 0.4s ease-out",
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
         "count-up": "count-up 0.5s ease-out forwards",
+        "modal-in": "modal-in 0.3s cubic-bezier(0.32, 0.72, 0, 1)",
       },
       transitionDuration: {
         DEFAULT: "200ms",

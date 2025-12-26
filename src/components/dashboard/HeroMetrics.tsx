@@ -65,7 +65,7 @@ export function HeroMetrics() {
         
         <Sparkline 
           data={last7DaysRevenue} 
-          color="#3B82F6"
+          color="blue"
           height={40}
           className="mt-4"
         />
@@ -110,7 +110,7 @@ export function HeroMetrics() {
         
         <Sparkline 
           data={last7DaysProfit} 
-          color={todayMetrics.profit >= 0 ? "#10B981" : "#EF4444"}
+          color={todayMetrics.profit >= 0 ? "blue" : "orange"}
           height={40}
           className="mt-4"
         />
