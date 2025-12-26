@@ -113,26 +113,6 @@ export function HeroMetrics() {
             <span className="text-muted-foreground ml-2 text-xs">vs yesterday</span>
           </div>
           
-          {/* Insight section */}
-          <div className="mt-4 pt-3 border-t border-border/30">
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Weekly avg:</span>
-              <span className="font-medium text-foreground">{formatKES(last7DaysRevenue.reduce((a, b) => a + b, 0) / 7)}</span>
-            </div>
-            <Sparkline 
-              data={last7DaysRevenue} 
-              color="blue"
-              height={32}
-              className="mt-2"
-            />
-            <div className="flex items-center justify-between text-xs mt-2">
-              <span className="text-muted-foreground">7-day trend</span>
-              <span className={`font-medium ${last7DaysRevenue[6] > last7DaysRevenue[0] ? 'text-primary' : 'text-secondary'}`}>
-                {last7DaysRevenue[6] > last7DaysRevenue[0] ? '↑ Growing' : '↓ Declining'}
-              </span>
-            </div>
-          </div>
-          
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         
@@ -165,24 +145,6 @@ export function HeroMetrics() {
                   : 0}%
               </span>
             </span>
-          </div>
-          
-          {/* Insight section */}
-          <div className="mt-4 pt-3 border-t border-border/30">
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Weekly total:</span>
-              <span className={`font-medium ${weeklyProfit >= 0 ? 'text-primary' : 'text-secondary'}`}>{formatKES(weeklyProfit)}</span>
-            </div>
-            <Sparkline 
-              data={last7DaysProfit} 
-              color={todayMetrics.profit >= 0 ? "blue" : "orange"}
-              height={32}
-              className="mt-2"
-            />
-            <div className="flex items-center justify-between text-xs mt-2">
-              <span className="text-muted-foreground">Avg margin</span>
-              <span className="font-medium text-foreground">{profitMargin.toFixed(0)}%</span>
-            </div>
           </div>
           
           <div className={`absolute inset-0 bg-gradient-to-br pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
